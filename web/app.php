@@ -19,6 +19,23 @@ $app->get('/',
 /**
  * Create
  */
+$app->get('/list',
+    function(Request $request) use ($app) {
+        $limit = 100;
+        $start = (intval($request->get('page'))-1)*$limit;
+        if ($start < 0) $start = 0;
+
+        $sql = "SELECT * FROM " . $app['settings']['config']['tables']['users'] . " LIMIT ".$start.", ".$limit;
+        $users = $app['db']->fetchAll($sql);
+
+        return $app['json_response'](array('success' => true, 'list' => $users));
+    }
+)
+->method('GET');
+
+/**
+ * Create
+ */
 $app->get('/create',
     function(Request $request) use ($app) {
 
