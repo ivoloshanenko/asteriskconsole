@@ -84,63 +84,63 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="createLabel">Create</h3>
       </div>
-      <form action="/create" id="createForm" class="modal-body form-horizontal" method="post">
+      <form action="/create" id="create-form" class="modal-body form-horizontal" method="post">
         <div class="control-group">
-          <label class="control-label" for="createFormName">Name</label>
+          <label class="control-label" for="create-form-name">Name</label>
           <div class="controls">
-            <input type="text" id="createFormName" name="user[name]" placeholder="Name">
+            <input type="text" id="create-form-name" name="user[name]" placeholder="Name">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormSecret">Secret</label>
+          <label class="control-label" for="create-form-secret">Secret</label>
           <div class="controls">
-            <input type="text" id="createFormSecret" name="user[secret]" placeholder="Secret">
+            <input type="text" id="create-form-secret" name="user[secret]" placeholder="Secret">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormCallerid">Callerid</label>
+          <label class="control-label" for="create-form-callerid">Callerid</label>
           <div class="controls">
-            <input type="text" id="createFormCallerid" name="user[callerid]" placeholder="Callerid">
+            <input type="text" id="create-form-callerid" name="user[callerid]" placeholder="Callerid">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormContext">Context</label>
+          <label class="control-label" for="create-form-context">Context</label>
           <div class="controls">
-            <input type="text" id="createFormContext" name="user[context]" placeholder="Context">
+            <input type="text" id="create-form-context" name="user[context]" placeholder="Context">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormPickupgroup">Pickupgroup</label>
+          <label class="control-label" for="create-form-pickupgroup">Pickupgroup</label>
           <div class="controls">
-            <input type="text" id="createFormPickupgroup" name="user[pickupgroup]" placeholder="Pickupgroup" pattern="\d*">
+            <input type="text" id="create-form-pickupgroup" name="user[pickupgroup]" placeholder="Pickupgroup" pattern="\d*">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormCallgroup">Callgroup</label>
+          <label class="control-label" for="create-form-callgroup">Callgroup</label>
           <div class="controls">
-            <input type="text" id="createFormCallgroup" name="user[callgroup]" placeholder="Callgroup" pattern="\d*">
+            <input type="text" id="create-form-callgroup" name="user[callgroup]" placeholder="Callgroup" pattern="\d*">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormNat">Nat</label>
+          <label class="control-label" for="create-form-nat">Nat</label>
           <div class="controls">
-            <select id="createFormNat" name="user[nat]">
+            <select id="create-form-nat" name="user[nat]">
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="createFormPermit">Permit</label>
+          <label class="control-label" for="create-form-permit">Permit</label>
           <div class="controls">
-            <input type="text" id="createFormPermit" placeholder="Permit" name="user[permit][0]">
-            <input type="text" id="createFormPermit" placeholder="Permit" name="user[permit][1]">
+            <input type="text" id="create-form-permit" placeholder="Permit" name="user[permit][0]">
+            <input type="text" id="create-form-permit" placeholder="Permit" name="user[permit][1]">
           </div>
         </div>
       </form>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button type="submit" class="btn btn-success" form="createForm">Create</button>
+        <button type="submit" class="btn btn-success" form="create-form">Create</button>
       </div>
     </div>
 
@@ -150,6 +150,7 @@
     <script src="assets/libs/jquery/jquery.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/libs/jquery.maskedinput/jquery.maskedinput.js"></script>
+    <script src="assets/libs/jquery.scrollto/jquery.scrollto.js"></script>
     <script src="assets/libs/underscore/underscore.js"></script>
     <script src="assets/app.js"></script>
 

@@ -92,7 +92,7 @@ $app->get('/create',
         if (count($errors) > 0) {
             $errors_formated = array();
             foreach ($errors as $error) {
-                array_push($errors_formated, array('user' . $error->getPropertyPath() => $error->getMessage()));
+                array_push($errors_formated, array('field' => 'user' . $error->getPropertyPath(), 'text' => $error->getMessage()));
             }
             return $app['json_response'](array('errors' => $errors_formated));
         }
@@ -101,7 +101,7 @@ $app->get('/create',
         $count = intval($app['db']->fetchAll($sql, array($user['name']))[0]['count(name)']);
 
         if ($count > 0)
-            return $app['json_response'](array('errors' => array('[name]' => 'Allready used')));
+            return $app['json_response'](array('errors' => array('field' => 'user[name]', 'text' => 'Allready used')));
 
         $app['db']->insert($app['settings']['config']['tables']['users'], array(
             'name' => $user['name'],
@@ -115,7 +115,7 @@ $app->get('/create',
             'permit' => $user['permit'][0].'/'.$user['permit'][1]
         ));
 
-        return $app['json_response'](array('success' => true));
+        return $app['json_response'](array('success' => true, 'user' => $user));
     }
 )
 ->method('POST');
