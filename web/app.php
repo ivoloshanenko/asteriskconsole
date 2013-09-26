@@ -36,6 +36,18 @@ $app->get('/list',
 /**
  * Create
  */
+$app->get('/remove',
+    function(Request $request) use ($app) {
+        $user = intval($request->get('user'));
+        $app['db']->delete($app['settings']['config']['tables']['users'], array($user));
+        return $app['json_response'](array('success' => true));
+    }
+)
+->method('DELETE|POST');
+
+/**
+ * Create
+ */
 $app->get('/create',
     function(Request $request) use ($app) {
 

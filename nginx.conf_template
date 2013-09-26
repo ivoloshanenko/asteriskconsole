@@ -9,6 +9,9 @@ server {
   # Assets
   location /assets {
     alias /asteriskconsole/frontend/assets;
+    access_log        off;
+    expires           off;
+    sendfile          off;
   }
 
   # Logs
