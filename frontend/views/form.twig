@@ -1,64 +1,65 @@
-<div id="create" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+<div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{form_id}}-label" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="createLabel">Create</h3>
+    <h3 id="{{form_id}}-label">{{ form_id == 'create' ? 'Create' : 'Edit' }}</h3>
   </div>
-  <form action="/create" id="create-form" class="modal-body form-horizontal" method="post">
+  <form id="{{form_id}}" class="modal-body form-horizontal" method="post">
+    <input type="hidden" name="user[id]" value="{{user ? user.id : ''}}">
     <div class="control-group">
-      <label class="control-label" for="create-form-name">Name</label>
+      <label class="control-label" for="{{form_id}}-name">Name</label>
       <div class="controls">
-        <input type="text" id="create-form-name" name="user[name]" placeholder="Name">
+        <input type="text" id="{{form_id}}-name" name="user[name]" value="{{user ? user.name : ''}}" placeholder="Name">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-secret">Secret</label>
+      <label class="control-label" for="{{form_id}}-secret">Secret</label>
       <div class="controls">
-        <input type="text" id="create-form-secret" name="user[secret]" placeholder="Secret">
+        <input type="text" id="{{form_id}}-secret" name="user[secret]" value="{{user ? user.secret : ''}}" placeholder="Secret">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-callerid">Callerid</label>
+      <label class="control-label" for="{{form_id}}-callerid">Callerid</label>
       <div class="controls">
-        <input type="text" id="create-form-callerid" name="user[callerid]" placeholder="Callerid">
+        <input type="text" id="{{form_id}}-callerid" name="user[callerid]" value="{{user ? user.callerid | escape : ''}}" placeholder="Callerid">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-context">Context</label>
+      <label class="control-label" for="{{form_id}}-context">Context</label>
       <div class="controls">
-        <input type="text" id="create-form-context" name="user[context]" placeholder="Context">
+        <input type="text" id="{{form_id}}-context" name="user[context]" value="{{user ? user.context : ''}}" placeholder="Context">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-pickupgroup">Pickupgroup</label>
+      <label class="control-label" for="{{form_id}}-pickupgroup">Pickupgroup</label>
       <div class="controls">
-        <input type="text" id="create-form-pickupgroup" name="user[pickupgroup]" placeholder="Pickupgroup" pattern="\d*">
+        <input type="text" id="{{form_id}}-pickupgroup" name="user[pickupgroup]" value="{{user ? user.pickupgroup : ''}}" placeholder="Pickupgroup" pattern="\d*">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-callgroup">Callgroup</label>
+      <label class="control-label" for="{{form_id}}-callgroup">Callgroup</label>
       <div class="controls">
-        <input type="text" id="create-form-callgroup" name="user[callgroup]" placeholder="Callgroup" pattern="\d*">
+        <input type="text" id="{{form_id}}-callgroup" name="user[callgroup]" value="{{user ? user.callgroup : ''}}" placeholder="Callgroup" pattern="\d*">
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-nat">Nat</label>
+      <label class="control-label" for="{{form_id}}-nat">Nat</label>
       <div class="controls">
-        <select id="create-form-nat" name="user[nat]">
+        <select id="{{form_id}}-nat" name="user[nat]">
           <option value="1">Yes</option>
           <option value="0">No</option>
         </select>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="create-form-permit">Permit</label>
+      <label class="control-label" for="{{form_id}}-permit">Permit</label>
       <div class="controls">
-        <input type="text" id="create-form-permit" placeholder="Permit" name="user[permit][0]">
-        <input type="text" id="create-form-permit" placeholder="Permit" name="user[permit][1]">
+        <input type="text" id="{{form_id}}-permit" placeholder="Permit" value="" name="user[permit][0]">
+        <input type="text" id="{{form_id}}-permit" placeholder="Permit" value="" name="user[permit][1]">
       </div>
     </div>
   </form>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button type="submit" class="btn btn-success" form="create-form">Create</button>
+    <button type="submit" class="btn btn-success" form="{{form_id}}">Create</button>
   </div>
 </div>

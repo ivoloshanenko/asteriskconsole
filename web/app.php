@@ -54,6 +54,7 @@ $app->get('/post',
         $user = $request->get('user');
 
         $constraint = new Assert\Collection(array(
+            'id' => array(),
             'name' => array(
                 new Assert\NotBlank(),
                 new Assert\Length(array('min' => 1, 'max' => 10))),
@@ -116,7 +117,9 @@ $app->get('/post',
                     'callgroup' => $user['callgroup'],
                     'nat' => $user['nat'] ? 'yes' : 'no',
                     'permit' => $user['permit'][0].'/'.$user['permit'][1]
-                ), $user['id']);
+                ), array($user['id']));
+
+            $id = $user['id'];
 
         } else {
             /** Creation */
@@ -127,7 +130,7 @@ $app->get('/post',
             if ($count > 0)
                 return $app['json_response'](array('errors' => array(array('field' => 'user[name]', 'text' => 'Allready used'))));
 
-            $app['db']->insert($app['settings']['config']['tables']['users'], array(
+            $user = $app['db']->insert($app['settings']['config']['tables']['users'], array(
                 'name' => $user['name'],
                 'username' => $user['name'],
                 'secret' => $user['secret'],
@@ -139,7 +142,12 @@ $app->get('/post',
                 'permit' => $user['permit'][0].'/'.$user['permit'][1]
             ));
 
+            $id = $app['db']->lastInsertId();
+
         }
+
+        $sql = "SELECT * FROM " . $app['settings']['config']['tables']['users'] . " WHERE id = ?";
+        $user = $app['db']->fetchAll($sql, array($id))[0];
 
         return $app['json_response'](array('success' => true, 'user' => $user));
     }

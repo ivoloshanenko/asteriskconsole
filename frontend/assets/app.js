@@ -28,7 +28,8 @@ app.list = function () {
         success: function(data) {
             if (!data.success) return alert('error loading list');
             _.each(data.list, function (user) {
-                app.initialize_row(user);
+                var $row = app.initialize_row(user);
+                app.$users_list.append($row);
             });
         }
     });
@@ -39,8 +40,6 @@ app.initialize_row = function (user) {
     var $row = $(twig({ ref: "row" }).render(user)),
         $remove = $row.find('[data-role="remove"]'),
         $edit = $row.find('[data-role="edit"]');
-
-    app.$users_list.append($row);
 
     $remove.click(function(){
         $.ajax({
@@ -55,24 +54,56 @@ app.initialize_row = function (user) {
     });
 
     $edit.click(function(){
-        $.ajax({
-            url: 'edit',
-            type: 'post',
-            success: function(data) {
-                if (!data.success) return alert('error removing');
-                $row.fadeOut(500);
-            }
+
+        var $edit_modal = $(twig({ ref: "form" }).render({
+            form_id: 'edit_user_' + user.id,
+            user: user
+        }));
+
+        var $edit_form = $edit_modal.find('form');
+
+        $('body').append($edit_modal);
+
+        $edit_form.submit(function(){
+            $.ajax({
+                url: 'post',
+                type: 'post',
+                data: $edit_form.serialize(),
+                success: function (data) {
+                    if (data.errors) {
+                        _.each(data.errors, function (error) {
+                            alert(error.field + ': ' + error.text);
+                        });
+                        return;
+                    }
+                    if (!data.success) return alert('error editing');
+
+                    var $new_row = app.initialize_row(data.user);
+                    $row.replaceWith($new_row);
+
+                    $edit_modal.modal('hide');
+                }
+            });
+
+            return false;
         });
+
+        $edit_modal.modal('show');
+
         return false;
     });
+
+    return $row;
 
 };
 
 app.initialize_create = function () {
 
     app.$create = $(twig({ ref: "form" }).render({
-        name: 'create'
+        form_id: 'create-form'
     }));
+
+    app.$create.attr('id', 'create');
 
     app.$create_form = app.$create.find('form');
 
@@ -92,9 +123,10 @@ app.initialize_create = function () {
                 }
                 if (!data.success) return alert('error creating');
 
-                app.initialize_row(data.user);
+                var $row = app.initialize_row(data.user);
+                app.$users_list.prepend($row);
 
-                $('#create').modal('hide');
+                app.$create.modal('hide');
             }
         });
 
