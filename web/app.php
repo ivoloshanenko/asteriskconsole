@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request,
  */
 $app->get('/',
     function(Request $request) use ($app) {
-        return $app['twig']->render('home', array());
+        return $app['twig']->render('home.twig', array());
     }
 )
 ->method('GET');
