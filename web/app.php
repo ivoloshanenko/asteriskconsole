@@ -41,6 +41,6 @@ $app->get('/create',
         return $app['json_response'](array('success' => true));
     }
 )
-->method('GET');
+->method('POST');
 
 $app->run();
