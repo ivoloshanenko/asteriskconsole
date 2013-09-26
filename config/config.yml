@@ -1,0 +1,15 @@
+settings:
+
+    config:
+
+        url:             'http://asteriskconsole'
+
+        tables:
+            users:       sip_buddies
+
+        db_connection:
+            dbname:      asteriskconsole
+            user:        root
+            password:   
+            host:        127.0.0.1
+            driver:      pdo_mysql

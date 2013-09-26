@@ -1,5 +1,10 @@
 {
     "require": {
-        "silex/silex": "1.*"
+        "silex/silex": "1.*",
+	    "symfony/yaml": "*",
+	    "symfony/validator": "*",
+	    "symfony/form": "*",
+	    "doctrine/dbal": "2.2.*",
+	    "igorw/config-service-provider": "*"
     }
 }
