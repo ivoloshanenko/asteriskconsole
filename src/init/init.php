@@ -38,3 +38,20 @@ $app['db']->executeQuery("SET NAMES utf8;");
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../../frontend/views',
 ));
+
+/************************************************************
+ * Symfony Validator
+ */
+$app->register(new Silex\Provider\ValidatorServiceProvider);
+
+/************************************************************
+ * Helpers
+ */
+$app['json_response'] = $app->share(function() use ($app) {
+    return function ($data) {
+        $response = new Response(json_encode($data));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    };
+});
+
