@@ -54,13 +54,33 @@ app.initialize_row = function (user) {
         return false;
     });
 
+    $edit.click(function(){
+        $.ajax({
+            url: 'edit',
+            type: 'post',
+            success: function(data) {
+                if (!data.success) return alert('error removing');
+                $row.fadeOut(500);
+            }
+        });
+        return false;
+    });
+
 };
 
 app.initialize_create = function () {
 
+    app.$create = $(twig({ ref: "form" }).render({
+        name: 'create'
+    }));
+
+    app.$create_form = app.$create.find('form');
+
+    $('body').append(app.$create);
+
     app.$create_form.submit(function(){
         $.ajax({
-            url: 'create',
+            url: 'post',
             type: 'post',
             data: app.$create_form.serialize(),
             success: function (data) {

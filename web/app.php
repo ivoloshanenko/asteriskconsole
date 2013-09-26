@@ -46,9 +46,9 @@ $app->get('/remove',
 ->method('DELETE|POST');
 
 /**
- * Create
+ * Create or edit
  */
-$app->get('/create',
+$app->get('/post',
     function(Request $request) use ($app) {
 
         $user = $request->get('user');
@@ -97,23 +97,49 @@ $app->get('/create',
             return $app['json_response'](array('errors' => $errors_formated));
         }
 
-        $sql = "SELECT count(name) FROM " . $app['settings']['config']['tables']['users'] . " WHERE name = ?";
-        $count = intval($app['db']->fetchAll($sql, array($user['name']))[0]['count(name)']);
+        if (isset($user['id']) && $user['id']) {
+            /** Edition */
 
-        if ($count > 0)
-            return $app['json_response'](array('errors' => array('field' => 'user[name]', 'text' => 'Allready used')));
+            $sql = "SELECT count(name) FROM " . $app['settings']['config']['tables']['users'] . " WHERE name = ? AND id <> ?";
+                $count = intval($app['db']->fetchAll($sql, array($user['name'], $user['id']))[0]['count(name)']);
 
-        $app['db']->insert($app['settings']['config']['tables']['users'], array(
-            'name' => $user['name'],
-            'username' => $user['name'],
-            'secret' => $user['secret'],
-            'callerid' => '"'.$user['callerid'].'"<'.$user['name'].'>',
-            'context' => $user['context'],
-            'pickupgroup' => $user['pickupgroup'],
-            'callgroup' => $user['callgroup'],
-            'nat' => $user['nat'] ? 'yes' : 'no',
-            'permit' => $user['permit'][0].'/'.$user['permit'][1]
-        ));
+                if ($count > 0)
+                    return $app['json_response'](array('errors' => array('field' => 'user[name]', 'text' => 'Allready used')));
+
+                $app['db']->update($app['settings']['config']['tables']['users'], array(
+                    'name' => $user['name'],
+                    'username' => $user['name'],
+                    'secret' => $user['secret'],
+                    'callerid' => '"'.$user['callerid'].'"<'.$user['name'].'>',
+                    'context' => $user['context'],
+                    'pickupgroup' => $user['pickupgroup'],
+                    'callgroup' => $user['callgroup'],
+                    'nat' => $user['nat'] ? 'yes' : 'no',
+                    'permit' => $user['permit'][0].'/'.$user['permit'][1]
+                ), $user['id']);
+
+        } else {
+            /** Creation */
+
+            $sql = "SELECT count(name) FROM " . $app['settings']['config']['tables']['users'] . " WHERE name = ?";
+            $count = intval($app['db']->fetchAll($sql, array($user['name']))[0]['count(name)']);
+
+            if ($count > 0)
+                return $app['json_response'](array('errors' => array(array('field' => 'user[name]', 'text' => 'Allready used'))));
+
+            $app['db']->insert($app['settings']['config']['tables']['users'], array(
+                'name' => $user['name'],
+                'username' => $user['name'],
+                'secret' => $user['secret'],
+                'callerid' => '"'.$user['callerid'].'"<'.$user['name'].'>',
+                'context' => $user['context'],
+                'pickupgroup' => $user['pickupgroup'],
+                'callgroup' => $user['callgroup'],
+                'nat' => $user['nat'] ? 'yes' : 'no',
+                'permit' => $user['permit'][0].'/'.$user['permit'][1]
+            ));
+
+        }
 
         return $app['json_response'](array('success' => true, 'user' => $user));
     }
