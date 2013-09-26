@@ -8,7 +8,7 @@ server {
 
   # Assets
   location /assets {
-    root /asteriskconsole/frontend/assets
+    alias /asteriskconsole/frontend/assets;
   }
 
   # Logs
