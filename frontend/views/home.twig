@@ -50,24 +50,24 @@
 
           <!-- CREATE -->
           <div class="span6">
-            <button class="btn btn-medium btn-success"><i class="icon-plus icon-white"></i> Create</button>
+            <a href="#create" role="button" class="btn btn-medium btn-success" data-toggle="modal"><i class="icon-plus icon-white"></i> Create</a>
           </div>
 
         </div>
 
         <!-- CONTENT -->
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th>name</th>
-              <th>secret</th>
-              <th>callerid</th>
-              <th>context</th>
-              <th>pickupgroup</th>
-              <th>permit</th>
-              <th>nat</th>
-              <th>ipaddr</th>
-              <th>useragent</th>
+              <th>Name</th>
+              <th>Secret</th>
+              <th>Callerid</th>
+              <th>Context</th>
+              <th>Pickupgroup</th>
+              <th>Permit</th>
+              <th>Nat</th>
+              <th>IPaddr</th>
+              <th>Useragent</th>
               <th></th>
             </tr>
           </thead>
@@ -124,23 +124,77 @@
 
     </section>
 
+    <!-- CREATE FORM -->
+    <div id="create" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="createLabel">Create</h3>
+      </div>
+      <form action="/create" id="createForm" class="modal-body form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="createFormName">Name</label>
+          <div class="controls">
+            <input type="text" id="createFormName" placeholder="Name">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormSecret">Secret</label>
+          <div class="controls">
+            <input type="text" id="createFormSecret" placeholder="Secret">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormCallerid">Callerid</label>
+          <div class="controls">
+            <input type="text" id="createFormCallerid" placeholder="Callerid">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormContext">Context</label>
+          <div class="controls">
+            <input type="text" id="createFormContext" placeholder="Context">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormPickupgroup">Pickupgroup</label>
+          <div class="controls">
+            <input type="text" id="createFormPickupgroup" placeholder="Pickupgroup">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormCallgroup">Callgroup</label>
+          <div class="controls">
+            <input type="text" id="createFormCallgroup" placeholder="Callgroup">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormNat">Nat</label>
+          <div class="controls">
+            <select id="createFormNat">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="createFormPermit">Permit</label>
+          <div class="controls">
+            <input type="text" id="createFormPermit" placeholder="Permit" class="ipmask">
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="submit" class="btn btn-success" form="createForm">Create</button>
+      </div>
+    </div>
+
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/libs/jquery/jquery.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-transition.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-alert.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-modal.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-tab.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-popover.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-button.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-typeahead.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap-affix.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/libs/jquery.maskedinput/jquery.maskedinput.js"></script>
     <script src="assets/app.js"></script>
 
   </body>
