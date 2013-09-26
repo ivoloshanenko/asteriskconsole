@@ -31,3 +31,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     ),
 ));
 $app['db']->executeQuery("SET NAMES utf8;");
+
+/************************************************************
+ * Twig template engine
+ */
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/../../frontend/views',
+));
