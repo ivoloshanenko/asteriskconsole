@@ -125,12 +125,12 @@
     </section>
 
     <!-- CREATE FORM -->
-    <div id="create" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true" method="post">
+    <div id="create" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="createLabel">Create</h3>
       </div>
-      <form action="/create" id="createForm" class="modal-body form-horizontal">
+      <form action="/create" id="createForm" class="modal-body form-horizontal" method="post">
         <div class="control-group">
           <label class="control-label" for="createFormName">Name</label>
           <div class="controls">
@@ -158,19 +158,19 @@
         <div class="control-group">
           <label class="control-label" for="createFormPickupgroup">Pickupgroup</label>
           <div class="controls">
-            <input type="text" id="createFormPickupgroup" name="user[pickupgroup]" placeholder="Pickupgroup">
+            <input type="text" id="createFormPickupgroup" name="user[pickupgroup]" placeholder="Pickupgroup" pattern="\d*">
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="createFormCallgroup">Callgroup</label>
           <div class="controls">
-            <input type="text" id="createFormCallgroup" name="user[callgroup]" placeholder="Callgroup">
+            <input type="text" id="createFormCallgroup" name="user[callgroup]" placeholder="Callgroup" pattern="\d*">
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="createFormNat">Nat</label>
-          <div class="controls" name="user[nat]">
-            <select id="createFormNat">
+          <div class="controls">
+            <select id="createFormNat" name="user[nat]">
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
@@ -179,7 +179,8 @@
         <div class="control-group">
           <label class="control-label" for="createFormPermit">Permit</label>
           <div class="controls">
-            <input type="text" id="createFormPermit" placeholder="Permit">
+            <input type="text" id="createFormPermit" placeholder="Permit" name="user[permit][0]">
+            <input type="text" id="createFormPermit" placeholder="Permit" name="user[permit][1]">
           </div>
         </div>
       </form>

@@ -30,7 +30,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'driver' =>     $app['settings']['config']['db_connection']['driver'],
     ),
 ));
-$app['db']->executeQuery("SET NAMES utf8;");
+$app['db']->executeQuery("SET NAMES latin1;");
 
 /************************************************************
  * Twig template engine
