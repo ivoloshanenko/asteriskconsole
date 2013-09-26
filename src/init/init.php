@@ -16,7 +16,7 @@ $app['debug'] = true;
 /************************************************************
  * Configs
  */
-$app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__."/../../config/config.yml", array(), new Igorw\Silex\ChainConfigDriver(array(new Instudies\Framework\Config\YamlCachableConfigDriver()))));
+$app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__."/../../config/config.yml", array(), new Igorw\Silex\ChainConfigDriver(array(new \Igorw\Silex\YamlConfigDriver()))));
 
 /************************************************************
  * Database connection
