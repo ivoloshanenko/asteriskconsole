@@ -1,7 +1,7 @@
 <div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{form_id}}-label" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="{{form_id}}-label">{{ form_id == 'create' ? 'Create' : 'Edit' }}</h3>
+    <h3 id="{{form_id}}-label">{{ form_id == 'create-form' ? 'Create' : 'Edit' }}</h3>
   </div>
   <form id="{{form_id}}" class="modal-body form-horizontal" method="post">
     <input type="hidden" name="user[id]" value="{{user ? user.id : ''}}">
