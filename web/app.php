@@ -24,8 +24,11 @@ $app->get('/list',
         $limit = 100;
         $start = (intval($request->get('page'))-1)*$limit;
         if ($start < 0) $start = 0;
+        $q = $request->get('q');
 
         $sql = "SELECT * FROM " . $app['settings']['config']['tables']['users'] . " LIMIT ".$start.", ".$limit;
+        if ($q) $sql = "SELECT * FROM " . $app['settings']['config']['tables']['users'] . " WHERE (name LIKE '%".$q."%' OR secret LIKE '%".$q."%' OR callerid LIKE '%".$q."%' OR context LIKE '%".$q."%' OR pickupgroup LIKE '%".$q."%' OR callgroup LIKE '%".$q."%' OR nat LIKE '%".$q."%' OR permit LIKE '%".$q."%') LIMIT ".$start.", ".$limit;
+
         $users = $app['db']->fetchAll($sql);
 
         return $app['json_response'](array('success' => true, 'list' => $users));

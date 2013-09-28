@@ -7,6 +7,7 @@ app.initilize = function () {
     app.$users_list = $('#users-list');
     app.list();
     app.initialize_create();
+    app.initialize_search();
 };
 
 app.initialize_templates = function () {
@@ -23,11 +24,13 @@ app.initialize_templates = function () {
     });
 };
 
-app.list = function () {
+app.list = function (q) {
     $.ajax({
         url: 'list',
+        data: { q: q },
         success: function(data) {
             if (!data.success) return alert('error loading list');
+            if (q) app.$users_list.html('');
             _.each(data.list, function (user) {
                 var $row = app.initialize_row(user);
                 app.$users_list.append($row);
@@ -159,6 +162,27 @@ app.initialize_create = function () {
         return false;
     });
 
+};
+
+app.initialize_search = function () {
+
+    var $form = $('[data-role="search-form"]'),
+        $input = $('[data-role="search-input"]');
+
+    app.$search_input = $input;
+
+    $form.submit(function() { 
+        app.on_search();
+    });
+
+    $input.bind('keyup change', function() {
+        app.on_search();
+    });
+
+};
+
+app.on_search = function () {
+    app.list(app.$search_input.val());
 };
 
 $(document).ready(function(){
