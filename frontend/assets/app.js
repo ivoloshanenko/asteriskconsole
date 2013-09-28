@@ -50,7 +50,14 @@ app.initialize_form = function (user, cb) {
 
     app.modals.push($modal);
 
-    var $form = $modal.find('form');
+    var $form = $modal.find('form'),
+        $callerid = $form.find('[data-role="callerid"]');
+
+    var callerid = $callerid.val().split('"');
+    if (callerid.length > 1) callerid = callerid[1];
+    else callerid = callerid[0];
+
+    $callerid.val(callerid);
 
     $('body').append($modal);
 
