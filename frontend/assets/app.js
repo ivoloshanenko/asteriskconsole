@@ -69,6 +69,9 @@ app.initialize_form = function (user, cb) {
         $permit1.val(permit[1]);
     }
 
+    $permit0.ipAddress();
+    $permit1.ipAddress();
+
     $form.submit(function(){
         $.ajax({
             url: 'post',
