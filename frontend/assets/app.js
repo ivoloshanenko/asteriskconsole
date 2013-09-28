@@ -30,9 +30,9 @@ app.list = function (q) {
         data: { q: q },
         success: function(data) {
             if (!data.success) return alert('error loading list');
-            if (q) app.$users_list.html('');
+            app.$users_list.html('');
             _.each(data.list, function (user) {
-                var $row = app.initialize_row(user);
+                var $row = app.initialize_row(user, q);
                 app.$users_list.append($row);
             });
         }
@@ -105,7 +105,7 @@ app.initialize_form = function (user, cb) {
 
 };
 
-app.initialize_row = function (user) {
+app.initialize_row = function (user, q) {
 
     var $row = $(twig({ ref: "row" }).render(user)),
         $callerid = $row.find('[data-role="callerid"]'),
@@ -142,6 +142,13 @@ app.initialize_row = function (user) {
         $modal.modal('show');
         return false;
     });
+
+    if (q) {
+        _.each($row.find('td'), function(td, key) {
+            var $td = $(td);
+            $td.highlight(q);
+        });
+    }
 
     return $row;
 
