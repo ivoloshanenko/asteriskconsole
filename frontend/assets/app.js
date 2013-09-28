@@ -53,7 +53,10 @@ app.initialize_form = function (user, cb) {
     var $form = $modal.find('form'),
         $callerid = $form.find('[data-role="callerid"]'),
         $permit0 = $form.find('[data-role="permit0"]'),
-        $permit1 = $form.find('[data-role="permit1"]');
+        $permit1 = $form.find('[data-role="permit1"]'),
+        $errors = $form.find('[data-role="errors"]');
+
+    $errors.hide().html('');
 
     var callerid = $callerid.val().split('"');
     if (callerid.length > 1) callerid = callerid[1];
@@ -79,14 +82,16 @@ app.initialize_form = function (user, cb) {
             data: $form.serialize(),
             success: function (data) {
                 if (data.errors) {
+                    $errors.html('');
                     _.each(data.errors, function (error) {
-                        alert(error.field + ': ' + error.text);
+                        $errors.show().append($('<p>').addClass('text-error').text(error.field + ': ' + error.text));
                     });
                     return;
                 }
                 if (!data.success) return alert('error sending form');
 
                 cb(data);
+                $errors.hide().html('');
             }
         });
 

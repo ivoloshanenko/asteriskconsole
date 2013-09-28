@@ -4,6 +4,7 @@
     <h3 id="{{form_id}}-label">{{ form_id == 'create-form' ? 'Create' : 'Edit' }}</h3>
   </div>
   <form id="{{form_id}}" class="modal-body form-horizontal" method="post">
+    <div data-role="errors"></div>
     <input type="hidden" name="user[id]" value="{{user ? user.id : ''}}">
     <div class="control-group">
       <label class="control-label" for="{{form_id}}-name">Name</label>
