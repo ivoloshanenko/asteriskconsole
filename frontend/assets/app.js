@@ -25,7 +25,8 @@ app.initialize_templates = function () {
 };
 
 app.list = function (q) {
-    $.ajax({
+    if (app.current_list_query) app.current_list_query.abort();
+    app.current_list_query = $.ajax({
         url: 'list',
         data: { q: q },
         success: function(data) {
