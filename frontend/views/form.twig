@@ -20,7 +20,7 @@
     <div class="control-group">
       <label class="control-label" for="{{form_id}}-callerid">Callerid</label>
       <div class="controls">
-        <input type="text" id="{{form_id}}-callerid" name="user[callerid]" value="{{user ? user.callerid | escape : ''}}" placeholder="Callerid">
+        <input type="text" id="{{form_id}}-callerid" name="user[callerid]" value="{{user ? user.callerid | escape : ''}}" placeholder="Callerid" data-role="callerid">
       </div>
     </div>
     <div class="control-group">
@@ -53,13 +53,13 @@
     <div class="control-group">
       <label class="control-label" for="{{form_id}}-permit">Permit</label>
       <div class="controls">
-        <input type="text" id="{{form_id}}-permit" placeholder="Permit" value="" name="user[permit][0]">
-        <input type="text" id="{{form_id}}-permit" placeholder="Permit" value="" name="user[permit][1]">
+        <input type="text" id="{{form_id}}-permit" placeholder="Permit" value="" name="user[permit][0]" style="width:100px;">
+        <input type="text" id="{{form_id}}-permit" placeholder="Permit" value="" name="user[permit][1]" style="width:100px;">
       </div>
     </div>
   </form>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button type="submit" class="btn btn-success" form="{{form_id}}">Create</button>
+    <button type="submit" class="btn btn-success" form="{{form_id}}">{{ form_id == 'create-form' ? 'Create' : 'Edit' }}</button>
   </div>
 </div>
