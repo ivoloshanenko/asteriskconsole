@@ -42,7 +42,7 @@ $app->get('/list',
 $app->get('/remove',
     function(Request $request) use ($app) {
         $user = intval($request->get('user'));
-        $app['db']->delete($app['settings']['config']['tables']['users'], array($user));
+        $app['db']->delete($app['settings']['config']['tables']['users'], array('id' => $user));
         return $app['json_response'](array('success' => true));
     }
 )

@@ -123,6 +123,7 @@ app.initialize_row = function (user, q) {
         if (confirm('Are you sure?')) {
             $.ajax({
                 url: 'remove',
+                data: { user: user.id },
                 type: 'post',
                 success: function(data) {
                     if (!data.success) return alert('error removing');
