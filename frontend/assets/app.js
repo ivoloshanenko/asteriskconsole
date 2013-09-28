@@ -51,7 +51,9 @@ app.initialize_form = function (user, cb) {
     app.modals.push($modal);
 
     var $form = $modal.find('form'),
-        $callerid = $form.find('[data-role="callerid"]');
+        $callerid = $form.find('[data-role="callerid"]'),
+        $permit0 = $form.find('[data-role="permit0"]'),
+        $permit1 = $form.find('[data-role="permit1"]');
 
     var callerid = $callerid.val().split('"');
     if (callerid.length > 1) callerid = callerid[1];
@@ -60,6 +62,12 @@ app.initialize_form = function (user, cb) {
     $callerid.val(callerid);
 
     $('body').append($modal);
+
+    if (user && user.permit) {
+        var permit = user.permit.split('/');
+        $permit0.val(permit[0]);
+        $permit1.val(permit[1]);
+    }
 
     $form.submit(function(){
         $.ajax({

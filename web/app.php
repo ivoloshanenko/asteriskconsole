@@ -102,22 +102,22 @@ $app->get('/post',
             /** Edition */
 
             $sql = "SELECT count(name) FROM " . $app['settings']['config']['tables']['users'] . " WHERE name = ? AND id <> ?";
-                $count = intval($app['db']->fetchAll($sql, array($user['name'], $user['id']))[0]['count(name)']);
+            $count = intval($app['db']->fetchAll($sql, array($user['name'], $user['id']))[0]['count(name)']);
 
-                if ($count > 0)
-                    return $app['json_response'](array('errors' => array('field' => 'user[name]', 'text' => 'Allready used')));
+            if ($count > 0)
+                return $app['json_response'](array('errors' => array('field' => 'user[name]', 'text' => 'Allready used')));
 
-                $app['db']->update($app['settings']['config']['tables']['users'], array(
-                    'name' => $user['name'],
-                    'username' => $user['name'],
-                    'secret' => $user['secret'],
-                    'callerid' => '"'.$user['callerid'].'"<'.$user['name'].'>',
-                    'context' => $user['context'],
-                    'pickupgroup' => $user['pickupgroup'],
-                    'callgroup' => $user['callgroup'],
-                    'nat' => $user['nat'] ? 'yes' : 'no',
-                    'permit' => $user['permit'][0].'/'.$user['permit'][1]
-                ), array($user['id']));
+            $app['db']->update($app['settings']['config']['tables']['users'], array(
+                'name' => $user['name'],
+                'username' => $user['name'],
+                'secret' => $user['secret'],
+                'callerid' => '"'.$user['callerid'].'"<'.$user['name'].'>',
+                'context' => $user['context'],
+                'pickupgroup' => $user['pickupgroup'],
+                'callgroup' => $user['callgroup'],
+                'nat' => $user['nat'] ? 'yes' : 'no',
+                'permit' => $user['permit'][0].'/'.$user['permit'][1]
+            ), array('id' => $user['id']));
 
             $id = $user['id'];
 
