@@ -42,14 +42,16 @@ app.initialize_row = function (user) {
         $edit = $row.find('[data-role="edit"]');
 
     $remove.click(function(){
-        $.ajax({
-            url: 'remove',
-            type: 'post',
-            success: function(data) {
-                if (!data.success) return alert('error removing');
-                $row.fadeOut(500);
-            }
-        });
+        if (confirm('Are you sure?')) {
+            $.ajax({
+                url: 'remove',
+                type: 'post',
+                success: function(data) {
+                    if (!data.success) return alert('error removing');
+                    $row.fadeOut(500);
+                }
+            });
+        }
         return false;
     });
 
